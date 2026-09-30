@@ -1,0 +1,249 @@
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+  --bg: #0b0f1a;
+  --surface: #131a2a;
+  --text: #e8ecf3;
+  --muted: #7d879a;
+  --ok: #3ddc5a;
+  --bad: #ff3d3d;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: radial-gradient(circle at 50% 0%, #182038 0%, var(--bg) 60%);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+.game {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+.score {
+  font-size: 1.1rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(100%, 640px);
+  padding: 32px 24px;
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: 0 0 60px rgb(0 0 0 / 0.5);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.factor {
+  text-shadow: 0 0 24px currentColor;
+}
+
+.op {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.answer-input,
+.answer {
+  width: 2.2em;
+  min-height: 1.2em;
+  padding: 0 0.15em;
+  font: inherit;
+  text-align: center;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 0.08em solid var(--muted);
+  border-radius: 0;
+  outline: none;
+  caret-color: var(--text);
+}
+
+.answer-input:focus {
+  border-bottom-color: var(--text);
+  box-shadow: 0 0.3em 24px -0.2em rgb(232 236 243 / 0.4);
+}
+
+.answer-correct {
+  color: var(--ok);
+  border-bottom-color: var(--ok);
+  text-shadow: 0 0 24px currentColor;
+}
+
+.answer-wrong {
+  color: var(--bad);
+  border-bottom-color: var(--bad);
+  text-decoration: line-through;
+}
+
+.verdict {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.verdict-correct {
+  color: var(--ok);
+}
+
+.verdict-wrong {
+  color: var(--bad);
+}
+
+/* Array box: side label | rows, top label above rows, caption below. */
+.array-box {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  gap: 10px 12px;
+  margin: 0;
+  justify-items: center;
+}
+
+.array-label {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 16px currentColor;
+}
+
+.array-label-top {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: stretch;
+  padding-bottom: 6px;
+  text-align: center;
+  border-bottom: 5px solid currentColor;
+}
+
+.array-label-side {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  border-right: 5px solid currentColor;
+}
+
+.array-rows {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.array-row {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  box-shadow: 0 0 14px -2px var(--c);
+}
+
+.array-cell {
+  width: clamp(16px, 3.2vw, 26px);
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--c);
+  animation: pop 240ms ease-out backwards;
+  animation-delay: calc(var(--i) * 18ms);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.array-caption {
+  grid-column: 2;
+  grid-row: 3;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.next {
+  padding: 12px 32px;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  background: #1f2a44;
+  border: 1px solid #33426a;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.next:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.chip {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-weight: 700;
+  color: #0b0f1a;
+  background: var(--c);
+  box-shadow: 0 0 12px -2px var(--c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .array-cell {
+    animation: none;
+  }
+}
