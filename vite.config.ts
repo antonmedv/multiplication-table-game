@@ -4,6 +4,8 @@ import { defineConfig } from 'vitest/config'
 // https://vite.dev/config/
 // https://vitest.dev/config/
 export default defineConfig({
+  // GitHub Pages serves from /<repo>/; CI sets BASE_PATH, local dev stays at '/'.
+  base: process.env.BASE_PATH ?? '/',
   plugins: [react()],
   test: {
     environment: 'jsdom',
