@@ -12,25 +12,27 @@ export function ArrayBox({ a, b }: ArrayBoxProps) {
   const colorB = colorOf(b)
   return (
     <figure className="array-box" aria-label={`${a} rows of ${b}`}>
-      <div className="array-label array-label-top" style={{ color: colorB }}>
-        {b}
-      </div>
-      <div className="array-label array-label-side" style={{ color: colorA }}>
-        {a}
-      </div>
-      <div className="array-rows">
-        {Array.from({ length: a }, (_, row) => (
-          <div key={row} className="array-row" style={{ '--c': colorB } as CSSProperties}>
-            {Array.from({ length: b }, (__, col) => (
-              <span
-                key={col}
-                className="array-cell"
-                data-testid="cell"
-                style={{ '--i': row * b + col } as CSSProperties}
-              />
-            ))}
-          </div>
-        ))}
+      <div className="array-inner">
+        <div className="array-label array-label-top" style={{ color: colorB }}>
+          {b}
+        </div>
+        <div className="array-label array-label-side" style={{ color: colorA }}>
+          {a}
+        </div>
+        <div className="array-rows">
+          {Array.from({ length: a }, (_, row) => (
+            <div key={row} className="array-row" style={{ '--c': colorB } as CSSProperties}>
+              {Array.from({ length: b }, (__, col) => (
+                <span
+                  key={col}
+                  className="array-cell"
+                  data-testid="cell"
+                  style={{ '--i': row * b + col } as CSSProperties}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <figcaption className="array-caption">
         <span style={{ color: colorA }}>{a}</span> × <span style={{ color: colorB }}>{b}</span> ={' '}

@@ -21,12 +21,13 @@ function randomFactor(rng: Rng): number {
 /** Random question with factors in [MIN_FACTOR, MAX_FACTOR]. Avoids repeating `previous` pair. */
 export function randomQuestion(rng: Rng = Math.random, previous?: Question): Question {
   let question = makeQuestion(randomFactor(rng), randomFactor(rng))
-  for (let attempt = 0; attempt < 20 && isSamePair(question, previous); attempt++) {
+  if (!previous) return question
+  for (let attempt = 0; attempt < 20 && samePair(question, previous); attempt++) {
     question = makeQuestion(randomFactor(rng), randomFactor(rng))
   }
   return question
 }
 
-function isSamePair(q: Question, previous?: Question): boolean {
-  return previous !== undefined && q.a === previous.a && q.b === previous.b
+export function samePair(x: Question, y: Question): boolean {
+  return x.a === y.a && x.b === y.b
 }
